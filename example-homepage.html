@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrAInstormX - Elevate Your Thinking</title>
+    <style>
+        /* Base styles */
+        :root {
+            --black: #121212;
+            --dark-gray: #1E1E1E;
+            --medium-gray: #2D2D2D;
+            --light-gray: #F0F0F0;
+            --white: #FFFFFF;
+            --red: #FF3333;
+            --dark-red: #CC0000;
+            --light-red: #FF6666;
+            --gradient-primary: linear-gradient(135deg, #121212, #333333);
+            --gradient-accent: linear-gradient(135deg, #FF3333, #CC0000);
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--black);
+            color: var(--white);
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        .header {
+            background: var(--black);
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid var(--red);
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--red);
+        }
+        
+        .tagline {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 1px;
+            margin-top: 2px;
+            font-weight: 500;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--red);
+        }
+        
+        .cta-button {
+            background: linear-gradient(90deg, #121212 0%, #333333 100%);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            border-left: 3px solid var(--red);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--red) 0%, var(--dark-red) 100%);
+            transition: width 0.3s ease;
+            z-index: 1;
+            opacity: 0;
+        }
+        
+        .cta-button span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-button:hover {
+            box-shadow: 0 6px 20px rgba(255, 51, 51, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .cta-button:hover::before {
+            width: 100%;
+            opacity: 1;
+        }
+        
+        .cta-button-alt {
+            background: linear-gradient(90deg, var(--red) 0%, var(--dark-red) 100%);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 51, 51, 0.3);
+            display: inline-block;
+        }
+        
+        .cta-button-alt:hover {
+            background: linear-gradient(90deg, var(--light-red) 0%, var(--red) 100%);
+            box-shadow: 0 6px 20px rgba(255, 51, 51, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Hero section */
+        .hero {
+            display: flex;
+            padding: 6rem 2rem;
+            background: var(--black);
+            min-height: 80vh;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/1200/800');
+            background-size: cover;
+            opacity: 0.08;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
+            padding-right: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .hero-image {
+            width: 45%;
+            z-index: 2;
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--medium-gray);
+        }
+        
+        /* Platform interface section */
+        .platform-interface-section {
+            padding: 6rem 2rem;
+            background-color: var(--black);
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--medium-gray);
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .platform-interface-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 51, 51, 0.05) 0%, transparent 70%);
+            z-index: 1;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .platform-section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .platform-section-title h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .platform-section-title p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .platform-interface-container {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+        
+        .platform-interface-preview {
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .platform-interface-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .platform-button-container {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .platform-button {
+            background: linear-gradient(90deg, #121212 0%, #333333 100%);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            border-left: 3px solid var(--red);
+            font-weight: 600;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 51, 51, 0.25);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            z-index: 1;
+        }
+        
+        .platform-button span {
+            position: relative;
+            z-index: 3;
+        }
+        
+        .platform-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--red) 0%, var(--dark-red) 100%);
+            transition: width 0.4s ease;
+            z-index: 1;
+            opacity: 0;
+        }
+        
+        .platform-button:hover {
+            box-shadow: 0 6px 25px rgba(255, 51, 51, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .platform-button:hover::before {
+            width: 100%;
+            opacity: 1;
+        }
+        
+        .button-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 51, 51, 0.1) 0%, transparent 70%);
+            animation: pulse 3s infinite;
+            z-index: 0;
+        }
+        
+        .platform-interface-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .platform-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+        }
+        
+        .platform-feature-icon {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--red);
+            border-radius: 4px;
+        }
+        
+        .platform-feature-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+        
+        .platform-feature-text h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        .platform-feature-text p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Features section */
+        .features {
+            padding: 6rem 2rem;
+            background-color: var(--dark-gray);
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--medium-gray);
+            border-radius: 4px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--red);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 4px;
+            background: var(--gradient-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--white);
+        }
+        
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* Testimonials section */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--black);
+            color: var(--white);
+            position: relative;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255, 51, 51, 0.05) 0%, transparent 70%);
+            z-index: 1;
+        }
+        
+        .testimonials .section-title {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonials .section-title h2 {
+            color: var(--white);
+        }
+        
+        .testimonials .section-title p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-card {
+            background: var(--medium-gray);
+            border-radius: 4px;
+            padding: 2rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-left: 3px solid var(--red);
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            margin-right: 1rem;
+            background-color: #333;
+            border: 1px solid var(--red);
+        }
+        
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--white);
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* CTA section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background-color: var(--medium-gray);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 51, 51, 0.1) 0%, transparent 50%);
+            z-index: 1;
+        }
+        
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-logo span {
+            color: var(--red);
+        }
+        
+        .footer-about p {
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--red);
+        }
+        
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        /* Code block animation inspired by Codefus */
+        .code-animation {
+            position: relative;
+            padding: 1.5rem;
+            background: var(--medium-gray);
+            border-radius: 4px;
+            overflow: hidden;
+            font-family: 'Fira Code', monospace;
+            color: var(--white);
+            margin-top: 2rem;
+            border-left: 3px solid var(--red);
+        }
+
+        .code-animation::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--red);
+            animation: pulse 2s infinite;
+        }
+
+        .code-line {
+            margin-bottom: 0.5rem;
+            display: flex;
+        }
+
+        .code-number {
+            opacity: 0.5;
+            width: 30px;
+            text-align: right;
+            margin-right: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .code-content {
+            flex: 1;
+        }
+
+        .highlight {
+            color: var(--red);
+            font-weight: bold;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding: 4rem 1.5rem;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                padding-right: 0;
+                margin-bottom: 3rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                width: 100%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .platform-interface-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section -->
+    <header class="header">
+        <div class="logo-container">
+            <a href="#" class="logo">BrAIn<span>Storm</span>X</a>
+            <div class="tagline">Innovate Accelerate Deliver</div>
+        </div>
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">Pricing</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </nav>
+        <a href="#platform" class="cta-button"><span>Access Platform</span></a>
+    </header>
+
+    <!-- Hero section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Thinking with BrAInstormX</h1>
+            <p>A cutting-edge platform designed to enhance creativity, streamline collaboration, and accelerate innovation for teams of all sizes.</p>
+            
+            <!-- Enhanced Code animation block -->
+            <div class="code-animation">
+                <div class="code-line">
+                    <div class="code-number">01</div>
+                    <div class="code-content">function <span class="highlight">solveProblem</span>(challenge) {</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">02</div>
+                    <div class="code-content">  // Generate multiple solution approaches</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">03</div>
+                    <div class="code-content">  const solutions = <span class="highlight">brAInstormX</span>.ideate(challenge);</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">04</div>
+                    <div class="code-content">  </div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">05</div>
+                    <div class="code-content">  // Filter and refine the best solutions</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">06</div>
+                    <div class="code-content">  const viable = solutions.<span class="highlight">filter</span>(s => s.feasibility > 0.7);</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">07</div>
+                    <div class="code-content">  </div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">08</div>
+                    <div class="code-content">  // Iterate and optimize the top solution</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">09</div>
+                    <div class="code-content">  let bestSolution = viable[0];</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">10</div>
+                    <div class="code-content">  for (let i = 0; i < 3; i++) {</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">11</div>
+                    <div class="code-content">    bestSolution = <span class="highlight">brAInstormX</span>.improve(bestSolution);</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">12</div>
+                    <div class="code-content">  }</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">13</div>
+                    <div class="code-content">  </div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">14</div>
+                    <div class="code-content">  return bestSolution;</div>
+                </div>
+                <div class="code-line">
+                    <div class="code-number">15</div>
+                    <div class="code-content">}</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="/api/placeholder/600/500" alt="BrAInstormX Platform Interface" style="background-color: #121212; padding: 20px; border: 1px solid var(--medium-gray);">
+        </div>
+    </section>
+
+    <!-- Platform Interface Section -->
+    <section id="platform" class="platform-interface-section">
+        <div class="platform-section-title">
+            <h2>The BrAInstormX Platform</h2>
+            <p>Powerful tools designed for seamless collaboration and innovation</p>
+        </div>
+        <div class="platform-interface-container">
+            <div class="platform-interface-preview">
+                <img src="/api/placeholder/900/500" alt="BrAInstormX Platform Interface" style="background-color: #121212; padding: 20px; border: 1px solid var(--medium-gray);">
+            </div>
+            
+            <!-- Added platform button -->
+            <div class="platform-button-container">
+                <a href="#" class="platform-button">
+                    <span>Access BrAInstormX Platform Interface</span>
+                    <div class="button-glow"></div>
+                </a>
+            </div>
+            
+            <div class="platform-interface-features">
+                <div class="platform-feature">
+                    <div class="platform-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="white"></path>
+                        </svg>
+                    </div>
+                    <div class="platform-feature-text">
+                        <h3>Intuitive UI</h3>
+                        <p>Clean, modern interface designed for maximum productivity</p>
+                    </div>
+                </div>
+                <div class="platform-feature">
+                    <div class="platform-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 2h2v2h-2V5zm-2 0H8v2h2V5zM5 8h14v10H5V8z" fill="white"></path>
+                        </svg>
+                    </div>
+                    <div class="platform-feature-text">
+                        <h3>AI-Powered Tools</h3>
+                        <p>Advanced algorithms assist in idea generation and refinement</p>
+                    </div>
+                </div>
+                <div class="platform-feature">
+                    <div class="platform-feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.

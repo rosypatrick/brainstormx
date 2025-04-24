@@ -1,0 +1,56 @@
+# BrAInstormX – Project Rules & Engineering Principles
+
+## 🔧 Core Philosophy
+
+BrAInstormX is built to be fast, flexible, and future-ready. We are designing with **Context7 MCP** in mind to allow modular access to AI services, filesystem interfaces, and custom workflows without vendor lock-in.
+
+We prioritize:
+- Modularity over monoliths
+- Explicit over clever
+- Performance with purpose
+- Craic-infused code culture
+
+---
+
+## 🧠 Libraries & Frameworks
+
+### Core System
+- **Context7 MCP** — the backbone of service interactions
+  - Use `@upstash/context7-mcp` to define and manage execution contexts
+  - Prefer `npx` execution for external module initialization in dev
+  - Treat each service (search, filesystem, browser, etc.) as an independently swappable context
+
+---
+
+## 🧱 Structure Rules
+
+### File System
+
+
+
+### Services
+- All services must be pluggable via MCP (Context7)
+- Wrap each `@modelcontextprotocol/*` library inside `/services`
+- Each service should expose:
+  - `initContext()` for local config
+  - `runTask(input): output` — consistent interface
+- Prefer dependency injection where possible
+
+---
+
+## 🌍 Global Rules
+
+- ✅ **Use Context7 MCP for all non-UI integrations**
+- ⛔ No direct calls to OpenAI or third-party APIs without a context wrapper
+- 🧪 Services should be mockable (for dev) and switchable (for prod)
+- 🧼 No hardcoded paths, secrets, or keys — use `.env`
+- 🗃 All data that touches the user should be logged for context/traceability
+- 🎯 If it feels like too much boilerplate, abstract it to a utility or base class
+- 🧬 Think in *contexts*, not just APIs — the architecture is built around modular thought spaces
+
+---
+
+## 🚦 Deployment Progression Path
+
+```text
+Local Dev → Codespaces (GitHub) → Render (Staging & Production)
